@@ -7,7 +7,7 @@ const ganache = require('ganache-cli')  //to create local ETH test network
 const Web3 = require('web3')  // constructor function, uppercase
 const web3 = new Web3(ganache.provider());  // create Web3 instance
 
-
+/*                          // simple test script
 class Car { //create class
   park() {  //create methods that return strings
     return 'stopped';
@@ -34,3 +34,4 @@ describe('Car Condition',() => {  // describe the tests
     assert.equal(car.drive(), 'vroom')  // compare values
   });
 });
+*/
