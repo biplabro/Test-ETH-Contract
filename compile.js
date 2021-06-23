@@ -7,3 +7,4 @@ const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol') //mention th
 const source = fs.readFileSync(inboxPath, 'utf8') //read the contents of the contract/file, mention encoding
 
 console.log(solc.compile(source,1)) //compile 'source' using 'solc' compiler, number of contracts = 1
+// wrapping compiler call inside console.log to see whats happening inside the code

@@ -7,11 +7,11 @@ contract Inbox {                //contract definition, similar to "class" concep
         message = initialMessage;
     }
 
-    function setMessage(string newMessage) public {
+    function setMessage(string newMessage) public {     //set the string value
         message = newMessage;
     }
 
     /*function getMessage() public view returns (string) {    //getMessage with no arguments, type = public view, return type string
-        return message; //redundant function
+        return message; //redundant function, read the string value
     }*/
 }
