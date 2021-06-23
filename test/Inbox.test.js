@@ -8,25 +8,29 @@ const Web3 = require('web3')  // constructor function, uppercase
 const web3 = new Web3(ganache.provider());  // create Web3 instance
 
 
-class Car {
-  park() {
+class Car { //create class
+  park() {  //create methods that return strings
     return 'stopped';
   }
 
-  drive() {
+  drive() { // this function returns 'vroom'
     return 'vroom';
   }
 }
 
-describe('Car Condition',() => {
 
-  it('can park', () => {
-    const car = new Car();
-    assert.equal(car.park(), 'stopped')
+let car;  // dechare a variable that will be used in each test instance
+beforeEach(() => {  // executed before every 'it' statement
+  car = new Car();  // create instance of Car object
+});
+
+describe('Car Condition',() => {  // describe the tests
+
+  it('can park', () => {  // test the park() method
+    assert.equal(car.park(), 'stopped') // compare obtained & given value
   });
 
-  it('can drive', () => {
-    const car = new Car();
-    assert.equal(car.drive(), 'vroom')
+  it('can drive', () => { // test drive() method
+    assert.equal(car.drive(), 'vroom')  // compare values
   });
 });
