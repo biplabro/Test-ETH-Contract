@@ -12,6 +12,6 @@ contract Inbox {                //contract definition, similar to "class" concep
     }
 
     /*function getMessage() public view returns (string) {    //getMessage with no arguments, type = public view, return type string
-        return message; //redundant function, read the string value
+        return message; //redundant function, returns the string value
     }*/
 }
