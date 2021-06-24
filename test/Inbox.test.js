@@ -7,6 +7,23 @@ const ganache = require('ganache-cli')  //to create local ETH test network
 const Web3 = require('web3')  // constructor function, uppercase
 const web3 = new Web3(ganache.provider());  // create Web3 instance
 
+beforeEach(() => {
+  // get a list of all accounts
+  web3.eth.getAccounts()
+    .then((fetchedAccounts) => {
+      console.log(fetchedAccounts)
+    });
+
+  // use one of those accounts to deploy contract
+})
+
+describe ('Inbox', () => {
+  it('deploys a contract', () => {
+    
+  });
+});
+
+
 /*                          // simple test script
 class Car { //create class
   park() {  //create methods that return strings
