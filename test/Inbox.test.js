@@ -9,6 +9,8 @@ const web3 = new Web3(ganache.provider());  // create Web3 instance
 const {interface, bytecode} = require('../compile') // fetched from the compile.js file
 
 let accounts;
+let inbox;
+const INITIAL_STRING = 'Genesis!'
 
 beforeEach(async () => {
   // get a list of all accounts, fetchedAccounts
@@ -16,7 +18,10 @@ beforeEach(async () => {
 
   // use one of those accounts to deploy contract
   inbox = await new web3.eth.Contract(JSON.parse(interface))  // interface = js ABI, generic interface of contract
-    .deploy({data: bytecode, arguments: ['Genesis']}) // bytecode = Raw compiled contract, deploy a new contract
+    .deploy({
+      data: bytecode,
+      arguments: [INITIAL_STRING]
+    }) // bytecode = Raw compiled contract, deploy a new contract
     .send({from: accounts[0], gas: '1000000'}); // send transaction to create contract
 })
 
@@ -24,6 +29,17 @@ describe ('Inbox', () => {
   it('deploys a contract', () => {
     //console.log(inbox);
     assert.ok(inbox.options.address); // test pass is address is created
+  });
+
+  it('has a default message', async () => {
+    const message = await inbox.methods.message().call();
+    assert.equal(message, INITIAL_STRING);
+  });
+
+  it('can change the message', async () => {
+    await inbox.methods.setMessage('message changed').send({from: accounts[0]}) ;
+    const message = await inbox.methods.message().call();
+    assert.equal(message, 'message changed');
   });
 });
 
