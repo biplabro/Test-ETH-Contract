@@ -6,7 +6,7 @@ const assert = require('assert')  // assurtion about tests; comparison. required
 const ganache = require('ganache-cli')  //to create local ETH test network
 const Web3 = require('web3')  // constructor function, uppercase
 const web3 = new Web3(ganache.provider());  // create Web3 instance
-const {interface, bytecode} = require('../compile')
+const {interface, bytecode} = require('../compile') // fetched from the compile.js file
 
 let accounts;
 
@@ -15,14 +15,15 @@ beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
 
   // use one of those accounts to deploy contract
-  inbox = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({data: bytecode, arguments: ['Genesis']})
-    .send({from: accounts[0], gas: '1000000'});
+  inbox = await new web3.eth.Contract(JSON.parse(interface))  // interface = js ABI, generic interface of contract
+    .deploy({data: bytecode, arguments: ['Genesis']}) // bytecode = Raw compiled contract, deploy a new contract
+    .send({from: accounts[0], gas: '1000000'}); // send transaction to create contract
 })
 
 describe ('Inbox', () => {
   it('deploys a contract', () => {
-    console.log(inbox);
+    //console.log(inbox);
+    assert.ok(inbox.options.address); // test pass is address is created
   });
 });
 
