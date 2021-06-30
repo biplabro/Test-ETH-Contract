@@ -18,10 +18,7 @@ beforeEach(async () => {
 
   // use one of those accounts to deploy contract
   inbox = await new web3.eth.Contract(JSON.parse(interface))  // interface = js ABI, generic interface of contract
-    .deploy({
-      data: bytecode,
-      arguments: [INITIAL_STRING]
-    }) // bytecode = Raw compiled contract, deploy a new contract
+    .deploy({data: bytecode, arguments: [INITIAL_STRING]}) // bytecode = Raw compiled contract, deploy a new contract
     .send({from: accounts[0], gas: '1000000'}); // send transaction to create contract
 })
 
