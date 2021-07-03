@@ -97,7 +97,40 @@ describe('Lottery Contract', () => {
     const difference = finalBalance - initialBalance;
     console.log(difference);  // redundant
     assert (difference > web3.utils.toWei('1.8', 'ether')); // some eth spent as gas, 1.8 is approximate amount that the winner gets
+  });
 
+  it('resets the balance to zero after pickWinner is called', async () =>{
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('2', 'ether')
+    });
+
+    await lottery.methods.pickWinner().send({ from: accounts[0]});
+    const lotteryBal = await web3.eth.getBalance(lottery.options.address);
+    assert.equal(0, lotteryBal);
+  });
+
+  it('picking winner resets the players array', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],    // participate in lottery
+      value: web3.utils.toWei('0.02', 'ether')
+    });
+    await lottery.methods.enter().send({
+      from: accounts[1],    // participate in lottery
+      value: web3.utils.toWei('0.02', 'ether')
+    });
+    await lottery.methods.enter().send({
+      from: accounts[2],    // participate in lottery
+      value: web3.utils.toWei('0.02', 'ether')
+    });
+
+    await lottery.methods.pickWinner().send({
+      from: accounts[0]   // execute pickWinner
+    });
+
+    const players = await lottery.methods.getPlayers().call();  // returns players array (addresses)
+
+    assert.equal(0, players.length);
   });
 
 });
