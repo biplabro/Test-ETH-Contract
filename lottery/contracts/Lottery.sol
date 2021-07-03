@@ -17,7 +17,7 @@ contract Lottery {                //contract definition, similar to "class" conc
     function random() private view returns (uint) { // returns an integer
        return uint (keccak256(block.difficulty, now, players));
     }
-    
+
 
     function pickWinner() public restricted {
         uint index = random() % players.length; // returns an integer within players number range

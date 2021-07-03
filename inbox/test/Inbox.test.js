@@ -25,7 +25,7 @@ beforeEach(async () => {
 describe ('Inbox', () => {
   it('deploys a contract', () => {
     //console.log(inbox);
-    assert.ok(inbox.options.address); // test pass is address is created
+    assert.ok(inbox.options.address); // test pass if address is created
   });
 
   it('has a default message', async () => {

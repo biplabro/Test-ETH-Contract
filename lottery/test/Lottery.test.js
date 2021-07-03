@@ -17,7 +17,48 @@ beforeEach(async () => {
 });
 
 describe('Lottery Contract', () => {
+
   it('deploys contract', () => {
-    assert.ok(lottery.options.address); // returns deployed address validation check
+    assert.ok(lottery.options.address); // checks if returns deployed address validation check
+  });
+
+  it('allows one account to enter', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+    });
+
+    const players = await lottery.methods.getPlayers().call({
+      from: accounts[0] // manager calling getAccounts() function
+    });
+
+    assert.equal(accounts[0], players[0]);
+    assert.equal(1, players.length);
+  });
+
+  it('allows multiple accounts to enter', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+    });
+
+    await lottery.methods.enter().send({
+      from: accounts[1],
+      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+    });
+
+    await lottery.methods.enter().send({
+      from: accounts[2],
+      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+    });
+
+    const players = await lottery.methods.getPlayers().call({
+      from: accounts[0]
+    });
+
+    assert.equal(accounts[0], players[0]);
+    assert.equal(accounts[1], players[1]);
+    assert.equal(accounts[2], players[2]);
+    assert.equal(3, players.length);
   });
 });
