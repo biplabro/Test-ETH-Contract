@@ -76,7 +76,7 @@ describe('Lottery Contract', () => {
 
   it ('only manager can call pickWinner', async () => {
     try { // try to execute transaction with invalid amount of ether
-      await lottery.methods.pickWinner().send({
+      await lottery.methods.pickWinner().send({ // pickWinner() called from account[n]
         from: accounts[1],  // other than manager account
       });
       assert(false);    // failing assertion
