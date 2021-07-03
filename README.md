@@ -17,6 +17,9 @@ Each seperate contract & the required node modules are stored in the respective 
 Running 'node deploy.js' inside the project directory deploys the contract. 
 
 ### Software & packages:
+
 'npm install --save solc@0.4.17'
+
 'npm install web3@1.3.5'
+
 'npm install --save mocha ganace-cli'
