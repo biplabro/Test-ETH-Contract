@@ -39,17 +39,17 @@ describe('Lottery Contract', () => {
   it('allows multiple accounts to enter', async () => {
     await lottery.methods.enter().send({
       from: accounts[0],
-      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+      value: 11  // convert eth to wei web3.utils.towei('0.02', 'ether')
     });
 
     await lottery.methods.enter().send({
       from: accounts[1],
-      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+      value: 11,  // convert eth to wei web3.utils.towei('0.02', 'ether')
     });
 
     await lottery.methods.enter().send({
       from: accounts[2],
-      value: '11',  // convert eth to wei web3.utils.towei('0.02', 'ether')
+      value: 11,  // convert eth to wei web3.utils.towei('0.02', 'ether')
     });
 
     const players = await lottery.methods.getPlayers().call({
@@ -66,11 +66,22 @@ describe('Lottery Contract', () => {
     try { // try to execute transaction with invalid amount of ether
       await lottery.methods.enter().send({
         from: accounts[0],
-        value: '7'
+        value: 7
       });
       assert(false);    // failing assertion
     } catch (err) {
       assert(err);  // check for errors
     }
-  })
+  });
+
+  it ('only manager can call pickWinner', async () => {
+    try { // try to execute transaction with invalid amount of ether
+      await lottery.methods.pickWinner().send({
+        from: accounts[1],  // other than manager account
+      });
+      assert(false);    // failing assertion
+    } catch (err) {
+      assert(err);  // check for errors
+    }
+  });
 });
