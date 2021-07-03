@@ -12,8 +12,9 @@ Each seperate contract & the required node modules are stored in the respective 
 **/test:** includes the test scripts to check the functionality of the contract in local blockchain env (computer)
 
 **Workflow:** the compile.js script takes the contract source as an input & it generates the contract object that includes
-* **Bytecode:** Deployed permanently into the blockchain
-* **ABI:** Can be accessed to interact with the contract, the communication layer between blockchain & javascript world
+* **Bytecode:** Deployed permanently into the blockchain.
+* **ABI:** Can be accessed to interact with the contract, the communication layer between blockchain & javascript world.
+
 Running 'node deploy.js' inside the project directory deploys the contract. 
 
 ### Software & packages:
