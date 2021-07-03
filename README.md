@@ -5,10 +5,15 @@ Diving into smart contracts to see how things work &amp; hopefully to make somet
 Each seperate contract & the required node modules are stored in the respective folders. 
 
 **package.json:** includes metadata & information regarding the project.
+
 **compile.js:** source paths & compiler information.
+
 **deploy.js:** web3 waller provider & API information used during deployment of the contract.
+
 **/node_modules:** contains the node modules required to develop the respective project.
+
 **/contracts:** includes the actual contract source files.
+
 **/test:** includes the test scripts to check the functionality of the contract in local blockchain env (computer)
 
 **Workflow:** the compile.js script takes the contract source as an input & it generates the contract object that includes
