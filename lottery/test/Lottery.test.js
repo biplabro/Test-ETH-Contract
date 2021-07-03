@@ -84,4 +84,23 @@ describe('Lottery Contract', () => {
       assert(err);  // check for errors
     }
   });
+
+  it('sends money to winner & resets the players array', async () => {
+    await lottery.methods.enter().send({  // participate in contest & spend 2 ether
+      from: accounts[0],
+      value: web3.utils.toWei('2', 'ether')
+    });
+
+    const initialBalance = await web3.eth.getBalance(accounts[0]);  // check the remaining balance
+
+    await lottery.methods.pickWinner().send({from: accounts[0]}); // execute pickWinner() from manager account
+
+    const finalBalance = await web3.eth.getBalance(accounts[0]);  // check the final balance
+
+    const difference = finalBalance - initialBalance;
+    console.log(difference);  // redundant
+    assert (difference > web3.utils.toWei('1.8', 'ether')); // some eth spent as gas, 1.8 is approximate amount that the winner gets
+
+  });
+
 });
