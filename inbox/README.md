@@ -1,2 +1,8 @@
-# Test-ETH-Contract
-Diving into smart contracts to see how things work &amp; hopefully to make something useful out of it. Feel free to fork from or commit to this repo to encourage collaborative learning.
+# Inbox Contract
+This contract creates/changes a string value stored in 'message' variable.
+
+'setMessage()' rewrites the string.
+
+'getMessage()' or 'message()' shows the string value.
+
+everytime the string is changed, the event & data is stored in the blockchain as a immutable transaction.
