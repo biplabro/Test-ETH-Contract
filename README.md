@@ -8,7 +8,7 @@ Each seperate contract & the required node modules are stored in the respective 
 
 **compile.js:** source paths & compiler information.
 
-**deploy.js:** web3 waller provider & API information used during deployment of the contract.
+**deploy.js:** web3 wallet provider & API information used during deployment of the contract.
 
 **/node_modules:** contains the node modules required to develop the respective project.
 
