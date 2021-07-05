@@ -70,19 +70,22 @@ describe('Lottery Contract', () => {
       });
       assert(false);    // failing assertion
     } catch (err) {
-      assert(err);  // check for errors
+      assert(err);  //  check whether error is the instance of mentioned class
     }
   });
 
   it ('only manager can call pickWinner', async () => {
+    let executed; // create a flag to check the try & catch blocks
     try { // try to execute transaction with invalid amount of ether
       await lottery.methods.pickWinner().send({ // pickWinner() called from account[n]
-        from: accounts[1],  // other than manager account
+        from: accounts[2],  // other than manager account
       });
       assert(false);    // failing assertion
+      executed = 'success'
     } catch (err) {
-      assert(err);  // check for errors
+      executed = 'fail'
     }
+    assert.equal('fail', executed);
   });
 
   it('sends money to winner & resets the players array', async () => {
