@@ -70,7 +70,7 @@ describe('Lottery Contract', () => {
       });
       assert(false);    // failing assertion
     } catch (err) {
-      assert(err);  //  check whether error is the instance of mentioned class
+      assert(err);  // check whether error is the instance of mentioned class
     }
   });
 
